@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin - Absensi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #1E1E1E;
+            color: #fff;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .bubble {
+            position: fixed;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(59, 130, 246, 0.3), rgba(37, 99, 235, 0.1));
+            filter: blur(60px);
+            animation: float 20s infinite ease-in-out;
+            pointer-events: none;
+        }
+
+        .bubble1 { width: 350px; height: 350px; top: 5%; left: 5%; animation-delay: 0s; }
+        .bubble2 { width: 450px; height: 450px; top: 50%; right: 5%; animation-delay: 7s; }
+        .bubble3 { width: 300px; height: 300px; bottom: 5%; left: 40%; animation-delay: 14s; }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            33% { transform: translate(60px, -60px); }
+            66% { transform: translate(-40px, 40px); }
+        }
+
+        .navbar {
+            background: rgba(42, 42, 42, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 40px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .navbar h1 {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 24px;
+        }
+
+        .navbar a {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .navbar a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 40px auto;
+            padding: 0 40px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .card {
+            background: rgba(42, 42, 42, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .card-title {
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: #3b82f6;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #ddd;
+            font-weight: 500;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            background: #2a2a2a;
+            border: 2px solid #3a3a3a;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 15px;
+            transition: all 0.3s;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        button {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-right: 10px;
+            margin-top: 5px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #6b7280, #4b5563);
+        }
+
+        .table-container {
+            overflow-x: auto;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(42, 42, 42, 0.5);
+        }
+
+        thead {
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(59, 130, 246, 0.1);
+        }
+
+        th {
+            font-weight: 600;
+            color: #3b82f6;
+        }
+
+        tbody tr {
+            transition: background 0.2s;
+        }
+
+        tbody tr:hover {
+            background: rgba(59, 130, 246, 0.05);
+        }
+
+        .status-badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .status-success {
+            background: rgba(34, 197, 94, 0.2);
+            color: #4ade80;
+        }
+
+        .status-failed {
+            background: rgba(239, 68, 68, 0.2);
+            color: #f87171;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .image-preview {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            object-fit: cover;
+            border: 2px solid #3b82f6;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .image-preview:hover {
+            transform: scale(1.1);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            font-size: 40px;
+            color: #fff;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .alert {
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            animation: slideIn 0.5s;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .alert-success {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            color: #4ade80;
+        }
+
+        .alert-error {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #f87171;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #888;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .navbar, .container {
+                padding: 20px;
+            }
+
+            .navbar h1 {
+                font-size: 20px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .table-container {
+                font-size: 14px;
+            }
+
+            th, td {
+                padding: 10px 8px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bubble bubble1"></div>
+    <div class="bubble bubble2"></div>
+    <div class="bubble bubble3"></div>
+
+    <div class="navbar">
+        <div class="navbar-content">
+            <h1>📊 Dashboard Admin</h1>
+            <a href="/index.html">← Kembali ke Absensi</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div id="alertContainer"></div>
+
+        <!-- Form Pendaftaran User -->
+        <div class="card">
+            <div class="card-title">
+                <span>👤</span> Pendaftaran Siswa Baru
+            </div>
+            
+            <form id="registerForm" enctype="multipart/form-data">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="regUsername">Username / Nama Siswa *</label>
+                        <input type="text" id="regUsername" name="username" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="regKelas">Kelas *</label>
+                        <select id="regKelas" name="kelas" required>
+                            <option value="">Pilih Kelas</option>
+                            <option value="X PPLG 1">X PPLG 1</option>
+                            <option value="X PPLG 2">X PPLG 2</option>
+                            <option value="XI PPLG 1">XI PPLG 1</option>
+                            <option value="XI PPLG 2">XI PPLG 2</option>
+                            <option value="XII PPLG 1">XII PPLG 1</option>
+                            <option value="XII PPLG 2">XII PPLG 2</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="regImage">Upload Foto Wajah *</label>
+                    <input type="file" id="regImage" name="image" accept="image/*" required>
+                </div>
+
+                <button type="submit">💾 Daftar Siswa</button>
+            </form>
+        </div>
+
+        <!-- Tabel Data User -->
+        <div class="card">
+            <div class="card-title">
+                <span>👥</span> Data Siswa Terdaftar
+            </div>
+
+            <div class="table-container">
+                <table id="usersTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Foto</th>
+                            <th>Username</th>
+                            <th>Kelas</th>
+                            <th>Tanggal Daftar</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="usersTableBody"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Tabel Riwayat Absensi -->
+        <div class="card">
+            <div class="card-title">
+                <span>📋</span> Riwayat Absensi
+            </div>
+
+            <div class="filter-group">
+                <button class="btn-secondary" onclick="filterAbsensi('')">Semua</button>
+                <button class="btn-secondary" onclick="filterAbsensi('success')">Sukses</button>
+                <button class="btn-secondary" onclick="filterAbsensi('failed')">Gagal</button>
+            </div>
+
+            <div class="table-container">
+                <table id="absensiTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Username</th>
+                            <th>Kelas</th>
+                            <th>Lokasi</th>
+                            <th>Status</th>
+                            <th>Waktu Absen</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="absensiTableBody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal untuk preview gambar -->
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <span class="modal-close">&times;</span>
+        <img id="modalImage" class="modal-content">
+    </div>
+
+    <script>
+        let currentFilter = '';
+
+        // Show alert
+        function showAlert(message, type) {
+            const alertContainer = document.getElementById('alertContainer');
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type}`;
+            alertDiv.textContent = message;
+            alertContainer.appendChild(alertDiv);
+
+            setTimeout(() => {
+                alertDiv.remove();
+            }, 5000);
+        }
+
+        // Load users
+        async function loadUsers() {
+            try {
+                const response = await fetch('/api/users');
+                const result = await response.json();
+
+                const tbody = document.getElementById('usersTableBody');
+                
+                if (result.success && result.data.length > 0) {
+                    tbody.innerHTML = result.data.map(user => `
+                        <tr>
+                            <td>${user.id}</td>
+                            <td><img src="${user.images}" class="image-preview" onclick="showImage('${user.images}')" alt="${user.username}"></td>
+                            <td>${user.username}</td>
+                            <td>${user.kelas}</td>
+                            <td>${new Date(user.created_at).toLocaleString('id-ID')}</td>
+                            <td>
+                                <button class="btn-danger" onclick="deleteUser(${user.id}, '${user.username}')">🗑️ Hapus</button>
+                            </td>
+                        </tr>
+                    `).join('');
+                } else {
+                    tbody.innerHTML = '<tr><td colspan="6" class="empty-state">Belum ada data siswa</td></tr>';
+                }
+            } catch (error) {
+                console.error('Error loading users:', error);
+                showAlert('Gagal memuat data siswa', 'error');
+            }
+        }
+
+        // Load absensi
+        async function loadAbsensi(status = '') {
+            try {
+                const url = status ? `/api/absensi?status=${status}` : '/api/absensi';
+                const response = await fetch(url);
+                const result = await response.json();
+
+                const tbody = document.getElementById('absensiTableBody');
+                
+                if (result.success && result.data.length > 0) {
+                    tbody.innerHTML = result.data.map(absen => `
+                        <tr>
+                            <td>${absen.id}</td>
+                            <td>${absen.username}</td>
+                            <td>${absen.kelas}</td>
+                            <td><a href="${absen.location}" target="_blank" style="color: #3b82f6;">📍 Lihat</a></td>
+                            <td><span class="status-badge status-${absen.status}">${absen.status === 'success' ? '✓ Sukses' : '✗ Gagal'}</span></td>
+                            <td>${new Date(absen.time_absen).toLocaleString('id-ID')}</td>
+                            <td>
+                                <button class="btn-danger" onclick="deleteAbsensi(${absen.id})">🗑️ Hapus</button>
+                            </td>
+                        </tr>
+                    `).join('');
+                } else {
+                    tbody.innerHTML = '<tr><td colspan="7" class="empty-state">Belum ada data absensi</td></tr>';
+                }
+            } catch (error) {
+                console.error('Error loading absensi:', error);
+                showAlert('Gagal memuat data absensi', 'error');
+            }
+        }
+
+        // Filter absensi
+        function filterAbsensi(status) {
+            currentFilter = status;
+            loadAbsensi(status);
+        }
+
+        // Register user
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(e.target);
+
+            try {
+                const response = await fetch('/api/users', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    showAlert('Siswa berhasil didaftarkan!', 'success');
+                    e.target.reset();
+                    loadUsers();
+                } else {
+                    showAlert(result.message, 'error');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showAlert('Gagal mendaftarkan siswa', 'error');
+            }
+        });
+
+        // Delete user
+        async function deleteUser(id, username) {
+            if (!confirm(`Hapus siswa "${username}"?`)) return;
+
+            try {
+                const response = await fetch(`/api/users/${id}`, {
+                    method: 'DELETE'
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    showAlert('Siswa berhasil dihapus', 'success');
+                    loadUsers();
+                } else {
+                    showAlert(result.message, 'error');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showAlert('Gagal menghapus siswa', 'error');
+            }
+        }
+
+        // Delete absensi
+        async function deleteAbsensi(id) {
+            if (!confirm('Hapus data absensi ini?')) return;
+
+            try {
+                const response = await fetch(`/api/absensi/${id}`, {
+                    method: 'DELETE'
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    showAlert('Data absensi berhasil dihapus', 'success');
+                    loadAbsensi(currentFilter);
+                } else {
+                    showAlert(result.message, 'error');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showAlert('Gagal menghapus data absensi', 'error');
+            }
+        }
+
+        // Show image modal
+        function showImage(src) {
+            document.getElementById('modalImage').src = src;
+            document.getElementById('imageModal').classList.add('active');
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('imageModal').classList.remove('active');
+        }
+
+        // Initial load
+        loadUsers();
+        loadAbsensi();
+    </script>
+</body>
+</html>

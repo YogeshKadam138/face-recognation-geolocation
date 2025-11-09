@@ -1,0 +1,27 @@
+
+⚠️ WARN:  Saya Asumsikan sudah menginstal dan bisa menggunakan tools database dan framework ini.
+- nodejs
+- mysql
+
+1. Instalasi NPM Modules:
+- npm install
+
+2. Membuat database mysql
+- Import file database/database.sql ke phpmyadmin
+- Cek database berhasil atau tidak!
+
+3. Jalankan project
+- npm run dev << jika gagal pakai "node app.js"
+- node app.js
+
+MEMAKAI APLIKASI WEBSITE:
+- Daftar di bagian dashboard dengan memasukan nama, kelas, dan upload image<< untuk kelas bisa di modifikasi di bagian public/dashboard.html dan database/database.sql 
+
+- Masuk ke absensi setelah daftar, dan lakukan absensi dengan memasukan nama dan klik untuk mengambil lokasi.
+
+- foto memakai face-api.js (camera), dan secara otomatis akan menganalisa kemiripan foto face-api dan foto dari database.
+
+Author Side: "SILAKAN DAN SAYA PERBOLEHKAN UNTUK MEMODIFIKASI FILE YANG SUDAH DI SAYA SEDIAKAN, DENGAN CATATAN SAYA MENGGUNAKAN VIBE CODING! DAN JUGA MEMILIKI DOKUMENTASI YANG KURANG LENGKAP."
+
+ADA YANG ERROR? KIRIM MASUKAN KE WHATSAPP pembuat!
+>> +62 895-3866-92667

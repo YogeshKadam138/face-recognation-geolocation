@@ -1,0 +1,31 @@
+{
+  "name": "absensi-face-recognition",
+  "version": "1.0.0",
+  "description": "Sistem Absensi dengan Face Recognition",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "keywords": [
+    "absensi",
+    "face-recognition",
+    "nodejs"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mysql2": "^3.6.5",
+    "multer": "^1.4.5-lts.1",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  },
+  "directories": {
+    "example": "examples",
+    "test": "test"
+  }
+}
